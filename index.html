@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlantSoul</title>
+</head>
+<body>
+    <h1>PlantSoul</h1>
+    <form action="/" method="post" enctype="multipart/form-data">
+        <label for="file">Upload an image:</label>
+        <input type="file" id="file" name="file">
+        <br>
+        <label for="processing_factor">Processing Factor:</label>
+        <input type="number" id="processing_factor" name="processing_factor" min="0" max="255" value="150">
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+    {% if original_image is defined %}
+    <h2>Original Image</h2>
+    <img src="data:image/jpeg;base64,{{ original_image|b64encode }}" alt="Original Image" style="max-width: 50%;">
+    <h2>Processed Image with Disease</h2>
+    <img src="data:image/jpeg;base64,{{ processed_image|b64encode }}" alt="Processed Image with Disease" style="max-width: 50%;">
+    <h2>Disease Classification</h2>
+    <p>Predicted Class: {{ predicted_class }}</p>
+    {% endif %}
+    {% if message %}
+    <p>{{ message }}</p>
+    {% endif %}
+</body>
+</html>
